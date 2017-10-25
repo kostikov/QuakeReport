@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class EarthQuakeAdapter extends ArrayAdapter<Earthquake> {
 
@@ -30,17 +33,34 @@ public class EarthQuakeAdapter extends ArrayAdapter<Earthquake> {
 
         Earthquake currentEarthQuake = getItem(position);
 
-        TextView magTextView = (TextView) listItemView.findViewById(R.id.mag_view);
+        TextView magTextView = (TextView) listItemView.findViewById(R.id.magnitude);
         magTextView.setText(String.valueOf(currentEarthQuake.getmMag()));
 
-        TextView cityTextView = (TextView) listItemView.findViewById(R.id.city_view);
+        TextView cityTextView = (TextView) listItemView.findViewById(R.id.location);
         cityTextView.setText(currentEarthQuake.getmCity());
 
-        TextView timeTextView = (TextView) listItemView.findViewById(R.id.time_view);
-        timeTextView.setText(String.valueOf(currentEarthQuake.getmDate()));
+        Date date = new Date(currentEarthQuake.getmTimeInMilliseconds());
+        String formattedData = formatDate(date);
+        String formattedTime = formatTime(date);
+
+        TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
+        dateTextView.setText(formattedData);
+
+        TextView timeTextView = (TextView) listItemView.findViewById(R.id.time);
+        timeTextView.setText(formattedTime);
 
         return listItemView;
 
 
+    }
+
+    private String formatDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+        return dateFormat.format(date);
+    }
+
+    private String formatTime(Date date) {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.US);
+        return timeFormat.format(date);
     }
 }
