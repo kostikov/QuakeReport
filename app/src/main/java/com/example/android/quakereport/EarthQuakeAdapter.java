@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class EarthQuakeAdapter extends ArrayAdapter<Earthquake> {
 
-    public EarthQuakeAdapter(Context context, ArrayList<Earthquake> earthquakes) {
+    private EarthQuakeAdapter(Context context, ArrayList<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
     }
 
