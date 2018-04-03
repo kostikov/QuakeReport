@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class EarthQuakeAdapter extends ArrayAdapter<Earthquake> {
 
-    private EarthQuakeAdapter(Context context, ArrayList<Earthquake> earthquakes) {
+    public EarthQuakeAdapter(Context context, ArrayList<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
     }
 
@@ -38,6 +38,8 @@ public class EarthQuakeAdapter extends ArrayAdapter<Earthquake> {
 
         TextView magTextView = (TextView) listItemView.findViewById(R.id.magnitude);
         GradientDrawable magCircle = (GradientDrawable) magTextView.getBackground();
+        TextView distanceTextView = (TextView) listItemView.findViewById(R.id.distance);
+        TextView locationTextView = (TextView) listItemView.findViewById(R.id.location);
 
         String mag = formatMagnitude(currentEarthQuake.getmMag());
 
@@ -45,9 +47,6 @@ public class EarthQuakeAdapter extends ArrayAdapter<Earthquake> {
         magCircle.setColor(magnitColor);
 
         magTextView.setText(mag);
-
-        TextView distanceTextView = (TextView) listItemView.findViewById(R.id.distance);
-        TextView locationTextView = (TextView) listItemView.findViewById(R.id.location);
 
         String distance, location;
         final String LOCATION_SEPARATOR = " of ";
